@@ -5,26 +5,27 @@ const Fetch = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon-form/?limit=10&offset=10');
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
         const data = await response.json();
-        console.log(data);
-
-        const pokemonCharacters = data.results;
-        setCards(pokemonCharacters);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+        console.log(data, 'this is data');
+        
+        const pokemonUrls = data.results.map((pokemon) => pokemon.url)
+        console.log(pokemonUrls, 'this is url')
+        
+        
+          setCards(data);
+          //console.log(pokemonData, 'this is pokedata')
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
   
     fetchData();
   }, []);
 
   return (
-    <>
-      {cards.map((card) => (
-        <h3 key={card.name}>{card.name}</h3>
-      ))}
-    </>
+    <div></div>
   );
 };
+
 export default Fetch;
