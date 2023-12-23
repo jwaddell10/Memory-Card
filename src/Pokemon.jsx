@@ -15,10 +15,12 @@ const Fetch = () => {
             const pokemonData = await response.json()
             return pokemonData;
         });
-      
-        const pokemonDetails = await pokemonDetailsPromise;
         
+        const pokemonDetails = await Promise.all(pokemonDetailsPromise);
+        console.log(pokemonDetails, 'this is details')
+
         setCards(pokemonDetails);
+        return pokemonDetails
           //console.log(pokemonData, 'this is pokedata')
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -26,10 +28,20 @@ const Fetch = () => {
       };
   
     fetchData();
-  }, []);
+  }, [setCards]);
+  
 
   return (
-    <div></div>
+    
+    <div>
+        {cards.map((pokemon, index) => (
+            <img 
+                key={index}
+                src={pokemon.sprites.front_default}
+                alt="pokemon-images">
+            </img>
+        ))}
+    </div>
   );
 };
 
