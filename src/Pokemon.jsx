@@ -7,13 +7,18 @@ const Fetch = () => {
       try {
         const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
         const data = await response.json();
-        console.log(data, 'this is data');
         
         const pokemonUrls = data.results.map((pokemon) => pokemon.url)
-        console.log(pokemonUrls, 'this is url')
         
+        const pokemonDetailsPromise = pokemonUrls.map( async (url) => {
+            const response = await fetch(url)
+            const pokemonData = await response.json()
+            return pokemonData;
+        });
+      
+        const pokemonDetails = await pokemonDetailsPromise;
         
-          setCards(data);
+        setCards(pokemonDetails);
           //console.log(pokemonData, 'this is pokedata')
         } catch (error) {
           console.error('Error fetching data:', error);
