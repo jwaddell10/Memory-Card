@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-const Fetch = () => {
+const DisplayPokemon = () => {
   const [cards, setCards] = useState([]);
   
   useEffect(() => {
@@ -29,6 +29,10 @@ const Fetch = () => {
   
     fetchData();
   }, [setCards]);
+
+  const HandleClick = () => {
+    console.log('you clicked me')
+  }
   
 
   return (
@@ -38,11 +42,12 @@ const Fetch = () => {
             <img 
                 key={index}
                 src={pokemon.sprites.front_default}
-                alt="pokemon-images">
-            </img>
+                alt="pokemon-images"
+                onClick={HandleClick}
+            />
         ))}
     </div>
   );
 };
 
-export default Fetch;
+export default DisplayPokemon;
