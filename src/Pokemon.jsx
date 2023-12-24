@@ -30,21 +30,24 @@ const DisplayPokemon = () => {
     fetchData();
   }, [setCards]);
 
-  const HandleClick = () => {
-    console.log('you clicked me')
+  const HandleClick = (e) => {
+    console.log(e.target.name, 'this is etarget')
   }
   
 
   return (
     
     <div>
-        {cards.map((pokemon, index) => (
-            <img 
-                key={index}
-                src={pokemon.sprites.front_default}
-                alt="pokemon-images"
-                onClick={HandleClick}
-            />
+        {cards.map((pokemon) => (
+            <div key={pokemon.id}>
+                <img
+                    name={pokemon.name}
+                    src={pokemon.sprites.front_default}
+                    alt="pokemon-images"
+                    onClick={HandleClick}
+                />
+                <p>{pokemon.name}</p>
+            </div>
         ))}
     </div>
   );
