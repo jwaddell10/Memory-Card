@@ -22,5 +22,6 @@ function App() {
 
 //header***
 //title, have it centered with score underneath
+//select easy, medium, hard? 
 
 export default App

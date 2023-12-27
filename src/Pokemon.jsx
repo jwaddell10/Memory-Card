@@ -1,56 +1,29 @@
 import { useState, useEffect } from 'react';
+import FetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
-  const [cards, setCards] = useState([]);
+    const pokemonCards = FetchPokemonAPIData();
+    console.log(pokemonCards, 'this is cardsfromapi')
   
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
-        const data = await response.json();
-        
-        const pokemonUrls = data.results.map((pokemon) => pokemon.url)
-        
-        const pokemonDetailsPromise = pokemonUrls.map( async (url) => {
-            const response = await fetch(url)
-            const pokemonData = await response.json()
-            return pokemonData;
-        });
-        
-        const pokemonDetails = await Promise.all(pokemonDetailsPromise);
-        console.log(pokemonDetails, 'this is details')
-
-        setCards(pokemonDetails);
-        return pokemonDetails
-          //console.log(pokemonData, 'this is pokedata')
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
+    const handleClick = () => {
+      console.log('Pokemon clicked!');
+    };
   
-    fetchData();
-  }, [setCards]);
-
-  const HandleClick = (e) => {
-    console.log(e.target.name, 'this is etarget')
-  }
-  
-
-  return (
-    
-    <div>
-        {cards.map((pokemon) => (
-            <div key={pokemon.id}>
-                <img
-                    name={pokemon.name}
-                    src={pokemon.sprites.front_default}
-                    alt="pokemon-images"
-                    onClick={HandleClick}
-                />
-                <p>{pokemon.name}</p>
-            </div>
+    return (
+      <div>
+        {pokemonCards.map((pokemon) => (
+          <div key={pokemon.id}>
+            <img
+              name={pokemon.name}
+              id={pokemon.id}
+              src={pokemon.sprites.front_default}
+              alt="pokemon-images"
+              onClick={handleClick}
+            />
+            <p>{pokemon.name}</p>
+          </div>
         ))}
-    </div>
-  );
-};
-
-export default DisplayPokemon;
+      </div>
+    );
+  };
+  
+  export default DisplayPokemon;
