@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react';
-import FetchPokemonAPIData from './FetchAPIData';
+import useFetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
-    const pokemonCards = FetchPokemonAPIData();
-    console.log(pokemonCards, 'this is cardsfromapi')
+    const cardArray = []
+    const {fetchData, data} = useFetchPokemonAPIData();
   
-    const handleClick = () => {
-      console.log('Pokemon clicked!');
+    const handleClick = (id) => {
+      console.log(id, 'this is id')
+      //save the target, 
+      cardArray.push(id)
+
+      const newCards = fetchData()
+
+      const data = newCards
+      return data;
     };
   
     return (
       <div>
-        {pokemonCards.map((pokemon) => (
+        {data.map((pokemon) => (
           <div key={pokemon.id}>
             <img
               name={pokemon.name}
               id={pokemon.id}
               src={pokemon.sprites.front_default}
               alt="pokemon-images"
-              onClick={handleClick}
+              onClick={() => handleClick(pokemon.id)}
             />
             <p>{pokemon.name}</p>
           </div>

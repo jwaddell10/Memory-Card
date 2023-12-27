@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
-const FetchPokemonAPIData = () => {
+const useFetchPokemonAPIData = () => {
     const [data, setData] = useState([]);
 
       const fetchData = async () => {
         try {
-          const response = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=20');
+          const response = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=50');
           const data = await response.json();
-          
           const pokemonUrls = data.results.map((pokemon) => pokemon.url)
           
           const pokemonDetailsPromise = pokemonUrls.map( async (url) => {
@@ -27,7 +26,7 @@ const FetchPokemonAPIData = () => {
     useEffect(() => {
         fetchData()
     }, []);
-    return data;
+    return {data, setData, fetchData};
   };
 
-  export default FetchPokemonAPIData;
+  export default useFetchPokemonAPIData;
