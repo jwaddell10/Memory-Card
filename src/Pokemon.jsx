@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react';
 import useFetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
     const cardArray = []
-    const {fetchData, data} = useFetchPokemonAPIData();
+    const {setData, fetchData, data} = useFetchPokemonAPIData();
+    
   
     const handleClick = (id) => {
       console.log(id, 'this is id')
       //save the target, 
       cardArray.push(id)
-
       const newCards = fetchData()
-
+      console.log(newCards, 'this is newcards')
       const data = newCards
-      return data;
+      console.log(data, 'this is data')
+      //setData(data)
+
     };
-  
+
     return (
       <div>
         {data.map((pokemon) => (
