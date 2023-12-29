@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
 import useFetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
-    const cardArray = []
+    const [cardArray, setCardArray] = useState([]);
     const {setData, fetchData, data} = useFetchPokemonAPIData();
     
-  
     const handleClick = (id) => {
-      console.log(id, 'this is id')
       //save the target, 
       cardArray.push(id)
       const newCards = fetchData()
-      console.log(newCards, 'this is newcards')
-      const data = newCards
-      console.log(data, 'this is data')
-      //setData(data)
+      setCardArray(...data, id)
+      console.log(setCardArray, 'this is setCardArray')
 
+      //function to check if id exists in array
     };
 
     return (
@@ -26,7 +23,10 @@ const DisplayPokemon = () => {
               id={pokemon.id}
               src={pokemon.sprites.front_default}
               alt="pokemon-images"
-              onClick={() => handleClick(pokemon.id)}
+              onClick={() => {
+                handleClick(pokemon.id);
+                console.log(cardArray, 'this is cardarray');
+            }}
             />
             <p>{pokemon.name}</p>
           </div>
