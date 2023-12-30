@@ -6,21 +6,23 @@ const DisplayPokemon = () => {
 
     
     const handleClick = (id) => {
-      //save the target, 
+      //check for matches
       const previousCards = [...cardArray]
-      const clickedCardId = [id]
+      const clickedCardId = id;
 
       let matching = false;
 
       previousCards.forEach((card) => {
-        if (card == clickedCardId) {
+        if (card === clickedCardId) {
           matching = true;
-          console.log(matching, 'this is matching')
-          return matching;
-        } else {
+          console.log('its a match')
+          return
+        } 
+        
+        if (!matching) {
           matching = false;
-          console.log('this isnt matching');
-          return matching
+          console.log('its not a match')
+
         }
       })
       let allCardsArray = [...cardArray, id]
