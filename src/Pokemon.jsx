@@ -7,13 +7,13 @@ const DisplayPokemon = () => {
     
     const handleClick = (id) => {
       //save the target, 
-      const allCards = [...cardArray]
-      const newestCard = [id]
+      const previousCards = [...cardArray]
+      const clickedCardId = [id]
 
       let matching = false;
 
-      allCards.forEach((item) => {
-        if (item == newestCard) {
+      previousCards.forEach((card) => {
+        if (card == clickedCardId) {
           matching = true;
           console.log(matching, 'this is matching')
           return matching;
@@ -23,8 +23,8 @@ const DisplayPokemon = () => {
           return matching
         }
       })
-      let newCard = [...cardArray, id]
-      setCardArray(newCard)
+      let allCardsArray = [...cardArray, id]
+      setCardArray(allCardsArray)
 
 
       //function to check if id exists in array
