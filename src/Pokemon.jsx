@@ -4,18 +4,11 @@ const DisplayPokemon = () => {
     const [cardArray, setCardArray] = useState([]);
     const {setData, fetchData, data} = useFetchPokemonAPIData();
     let i = data.length;
-    console.log(i, 'this is i')
     while (--i > 0) {
       let temp = Math.floor(Math.random() * (i + 1));
             [data[temp], data[i]] = [data[i], data[temp]];
     }
     //to rerender onclick
-
-    const handleClick = (pokemon) => {
-      console.log(pokemon, 'this is poke i clicked')
-
-      //render all of the pokemon, in random orders
-    }
 
     const checkForMatches = (id) => {
       //check for matches
@@ -45,17 +38,17 @@ const DisplayPokemon = () => {
     };
 
     return (
-      <div>
+      <div className='pokemonimagescontainer'>
         {data.map((pokemon) => (
-          <div key={pokemon.id}>
+          <div key={pokemon.id}
+               className='pokemonimages'>
             <img
               name={pokemon.name}
               id={pokemon.id}
               src={pokemon.sprites.front_default}
               alt="pokemon-images"
               onClick={() => {
-                checkForMatches(pokemon.id);
-                handleClick(pokemon);}}
+                checkForMatches(pokemon.id);}}
             />
             <p>{pokemon.name}</p>
           </div>
