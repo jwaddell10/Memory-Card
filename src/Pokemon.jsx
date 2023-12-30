@@ -3,13 +3,29 @@ import useFetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
     const [cardArray, setCardArray] = useState([]);
     const {setData, fetchData, data} = useFetchPokemonAPIData();
+
     
     const handleClick = (id) => {
       //save the target, 
-      cardArray.push(id)
-      const newCards = fetchData()
-      setCardArray(...data, id)
-      console.log(setCardArray, 'this is setCardArray')
+      const allCards = [...cardArray]
+      const newestCard = [id]
+
+      let matching = false;
+
+      allCards.forEach((item) => {
+        if (item == newestCard) {
+          matching = true;
+          console.log(matching, 'this is matching')
+          return matching;
+        } else {
+          matching = false;
+          console.log('this isnt matching');
+          return matching
+        }
+      })
+      let newCard = [...cardArray, id]
+      setCardArray(newCard)
+
 
       //function to check if id exists in array
     };
@@ -24,9 +40,7 @@ const DisplayPokemon = () => {
               src={pokemon.sprites.front_default}
               alt="pokemon-images"
               onClick={() => {
-                handleClick(pokemon.id);
-                console.log(cardArray, 'this is cardarray');
-            }}
+                handleClick(pokemon.id);}}
             />
             <p>{pokemon.name}</p>
           </div>
