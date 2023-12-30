@@ -3,9 +3,21 @@ import useFetchPokemonAPIData from './FetchAPIData';
 const DisplayPokemon = () => {
     const [cardArray, setCardArray] = useState([]);
     const {setData, fetchData, data} = useFetchPokemonAPIData();
+    let i = data.length;
+    console.log(i, 'this is i')
+    while (--i > 0) {
+      let temp = Math.floor(Math.random() * (i + 1));
+            [data[temp], data[i]] = [data[i], data[temp]];
+    }
+    //to rerender onclick
 
-    
-    const handleClick = (id) => {
+    const handleClick = (pokemon) => {
+      console.log(pokemon, 'this is poke i clicked')
+
+      //render all of the pokemon, in random orders
+    }
+
+    const checkForMatches = (id) => {
       //check for matches
       const previousCards = [...cardArray]
       const clickedCardId = id;
@@ -29,7 +41,7 @@ const DisplayPokemon = () => {
       setCardArray(allCardsArray)
 
 
-      //function to check if id exists in array
+      //if no match, i need to re render
     };
 
     return (
@@ -42,7 +54,8 @@ const DisplayPokemon = () => {
               src={pokemon.sprites.front_default}
               alt="pokemon-images"
               onClick={() => {
-                handleClick(pokemon.id);}}
+                checkForMatches(pokemon.id);
+                handleClick(pokemon);}}
             />
             <p>{pokemon.name}</p>
           </div>
