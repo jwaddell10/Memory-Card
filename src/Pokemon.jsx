@@ -31,10 +31,13 @@ const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
     if (matching) {
       setIsMatching(true);
       console.log('It\'s a match');
+      console.log(updateScore, 'this is updatescore')
+
       return;
     }
 
     updateScore();
+    setNewHighScore();
 
     // If no match, update state and continue
     let allCardsArray = [...cardArray, id];
@@ -56,7 +59,6 @@ const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
             alt="pokemon-images"
             onClick={() => {
               if (isMatching) {
-                setNewHighScore()
                 return;
               } else {
                 checkForMatches(pokemon.id);

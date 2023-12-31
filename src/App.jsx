@@ -11,7 +11,7 @@ function App() {
   };
 
   const setNewHighScore = () => {
-    setHighScore((prevScore => {prevScore}));
+    setHighScore((prevScore) => prevScore + 1)
   }
 
   return (
@@ -20,11 +20,11 @@ function App() {
         <h1 className='gameTitle'>Memory Card</h1>
         <div className='scoreBoard'>
           <h3>Score: {score}</h3>
-          <h3>High Score:</h3>
+          <h3>High Score: {highScore}</h3>
         </div>
       </div>
       <DisplayPokemon updateScore={updateScore}
-                      highScore={setNewHighScore} />
+                      setNewHighScore={setNewHighScore} />
     </>
   );
 }
