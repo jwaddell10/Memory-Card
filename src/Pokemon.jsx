@@ -16,37 +16,31 @@ const DisplayPokemon = ({ updateScore, setNewHighScore, resetScore  }) => {
 
 //click, if its a match, when you click again the game restarts.
 
-  const checkForMatches = (id) => {
-    // Check for matches
-    const previousCards = [...cardArray];
-    const clickedCardId = id;
+const checkForMatches = (id) => {
+  const previousCards = [...cardArray];
+  const clickedCardId = id;
 
-    let matching = false;
+  let matching = false;
 
-    previousCards.forEach((card) => {
-      if (card === clickedCardId) {
-        matching = true;
-      }
-    });
+  previousCards.forEach((card) => {
+    matching = card === clickedCardId ? true : matching;
+  });
 
-    // If a match is found, end the game and update the score
-    if (matching) {
-      setIsMatching(true);
-      setNewHighScore();
-
-      resetScore()
-      setCardArray([])
-      alert('its a match')
-    }
-
-    if (!matching) {
-      updateScore();
-      let allCardsArray = [...cardArray, id];
-      setIsMatching(false);
-      randomizeCardsOnClick();
-      setCardArray(allCardsArray);
-    }
-  };
+  if (matching) {
+    console.log('It\'s a match');
+    setIsMatching(true);
+    setNewHighScore();
+    resetScore();
+    setCardArray([]);
+  } else {
+    console.log('Not a match');
+    updateScore();
+    let allCardsArray = [...cardArray, id];
+    setIsMatching(false);
+    randomizeCardsOnClick();
+    setCardArray(allCardsArray);
+  }
+};
 
   return (
     <div className='pokemonimagescontainer'>
@@ -58,11 +52,7 @@ const DisplayPokemon = ({ updateScore, setNewHighScore, resetScore  }) => {
             src={pokemon.sprites.front_default}
             alt="pokemon-images"
             onClick={() => {
-              if (isMatching) {
-                return;
-              } else {
-                checkForMatches(pokemon.id);
-              }
+              checkForMatches(pokemon.id)
             }}
           />
           <p>{pokemon.name}</p>
