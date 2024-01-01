@@ -41,7 +41,7 @@ const checkForMatches = (id) => {
     setCardArray(allCardsArray);
   }
 };
-
+  
   return (
     <div className='pokemonimagescontainer'>
       {data.map((pokemon) => (
