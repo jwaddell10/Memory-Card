@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import useFetchPokemonAPIData from './FetchAPIData';
-const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
+const DisplayPokemon = ({ updateScore, setNewHighScore, resetScore  }) => {
   const [cardArray, setCardArray] = useState([]);
   const [isMatching, setIsMatching] = useState(false);
-  const { setData, fetchData, data } = useFetchPokemonAPIData();
+  const { data } = useFetchPokemonAPIData();
 
   const randomizeCardsOnClick = () => {
     let i = data.length;
@@ -13,6 +13,8 @@ const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
       [data[temp], data[i]] = [data[i], data[temp]];
     }
   };
+
+//click, if its a match, when you click again the game restarts.
 
   const checkForMatches = (id) => {
     // Check for matches
@@ -30,20 +32,23 @@ const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
     // If a match is found, end the game and update the score
     if (matching) {
       setIsMatching(true);
-      console.log('It\'s a match');
-      console.log(updateScore, 'this is updatescore')
+      setNewHighScore();
 
-      return;
+      resetScore()
+      setCardArray([])
+      alert('its a match')
     }
 
-    updateScore();
-    setNewHighScore();
+
+      updateScore();
+      let allCardsArray = [...cardArray, id];
+      setIsMatching(false);
+      randomizeCardsOnClick();
+      setCardArray(allCardsArray);
+    
+
 
     // If no match, update state and continue
-    let allCardsArray = [...cardArray, id];
-    setIsMatching(false);
-    randomizeCardsOnClick();
-    setCardArray(allCardsArray);
 
     // Continue with any additional logic if needed
   };
@@ -75,6 +80,7 @@ const DisplayPokemon = ({ updateScore, setNewHighScore  }) => {
 DisplayPokemon.propTypes = {
   updateScore: PropTypes.func.isRequired,
   setNewHighScore: PropTypes.func.isRequired,
+  resetScore: PropTypes.func.isRequired,
 };
   
   export default DisplayPokemon;

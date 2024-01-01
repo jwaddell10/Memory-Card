@@ -10,9 +10,17 @@ function App() {
     setScore((prevScore) => prevScore + 1);
   };
 
-  const setNewHighScore = () => {
-    setHighScore((prevScore) => prevScore + 1)
+  const resetScore = () => {
+    setScore(0)
   }
+
+  const setNewHighScore = () => {
+    // Compare the current score with the high score
+    const newHighScore = Math.max(score, highScore);
+  
+    // Set the state with the highest score
+    setHighScore(newHighScore);
+  };
 
   return (
     <>
@@ -24,7 +32,8 @@ function App() {
         </div>
       </div>
       <DisplayPokemon updateScore={updateScore}
-                      setNewHighScore={setNewHighScore} />
+                      setNewHighScore={setNewHighScore}
+                      resetScore={resetScore} />
     </>
   );
 }
