@@ -39,18 +39,13 @@ const DisplayPokemon = ({ updateScore, setNewHighScore, resetScore  }) => {
       alert('its a match')
     }
 
-
+    if (!matching) {
       updateScore();
       let allCardsArray = [...cardArray, id];
       setIsMatching(false);
       randomizeCardsOnClick();
       setCardArray(allCardsArray);
-    
-
-
-    // If no match, update state and continue
-
-    // Continue with any additional logic if needed
+    }
   };
 
   return (
