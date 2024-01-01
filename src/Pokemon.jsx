@@ -46,6 +46,7 @@ const checkForMatches = (id) => {
     <div className='pokemonimagescontainer'>
       {data.map((pokemon) => (
         <div key={pokemon.id} className='pokemonimages'>
+          <div className="grayBackground">
           <img
             name={pokemon.name}
             id={pokemon.id}
@@ -55,6 +56,7 @@ const checkForMatches = (id) => {
               checkForMatches(pokemon.id)
             }}
           />
+          </div>
           <p>{pokemon.name}</p>
         </div>
       ))}
