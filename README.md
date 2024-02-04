@@ -1,5 +1,4 @@
-**Title: Memory Card Game
-**
+**Title: Memory Card Game**
 
 **Description:** Crafted an entertaining Pokemon-themed memory card game as a practical exercise in utilizing state management and useEffect hooks in ReactJS. Implemented the Fisher-Yates shuffling algorithm to randomize the cards for an enhanced gaming experience
 
